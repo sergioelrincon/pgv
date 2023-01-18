@@ -3,12 +3,13 @@ Un servicio en red es un software o programa que proporciona una determinada fun
 
 Una clasificación de los servicios en red atendiendo a su finalidad o propósito puede ser la siguiente:
 
-* Administración/Configuración. Esta clase de servicios facilita la administración y gestión de las configuraciones de los distintos equipos de la red, por ejemplo: los servicios DHCP y DNS.
-* Acceso y control remoto. Los servicios de acceso y control remoto, se encargan de permitir la conexión de usuarios a la red desde lugares remotos, verificando su identidad y controlando su acceso, por ejemplo Telnet y SSH.
-* De Ficheros. Los servicios de ficheros consisten en ofrecer a la red grandes capacidades de almacenamiento para descongestionar o eliminar los discos de las estaciones de trabajo, permitiendo tanto el almacenamiento como la transferencia de ficheros, por ejemplo FTP.
-* Impresión. Permite compartir de forma remota impresoras de alta calidad, capacidad y coste entre múltiples usuarios, reduciendo así el gasto.
-* Información. Los servicios de información pueden servir ficheros en función de sus contenidos, como pueden ser los documentos de hipertexto, por ejemplo HTTP, o bien, pueden servir información para ser procesada por las aplicaciones, como es el caso de los servidores de bases de datos.
-* Comunicación. Permiten la comunicación entre los usuarios a través de mensajes escritos, por ejemplo email o correo electrónico mediante el protocolo SMTP.
+* **Administración/Configuración**. Esta clase de servicios facilita la administración y gestión de las configuraciones de los distintos equipos de la red, por ejemplo: los servicios DHCP y DNS.
+* **Acceso y control remoto**. Los servicios de acceso y control remoto, se encargan de permitir la conexión de usuarios a la red desde lugares remotos, verificando su identidad y controlando su acceso, por ejemplo Telnet y SSH.
+* **De ficheros**. Los servicios de ficheros consisten en ofrecer a la red grandes capacidades de almacenamiento para descongestionar o eliminar los discos de las estaciones de trabajo, permitiendo tanto el almacenamiento como la transferencia de ficheros, por ejemplo FTP.
+* **Impresión**. Permite compartir de forma remota impresoras de alta calidad, capacidad y coste entre múltiples usuarios, reduciendo así el gasto.
+* **Información**. Los servicios de información pueden servir ficheros en función de sus contenidos, como pueden ser los documentos de hipertexto, por ejemplo HTTP, o bien, pueden servir información para ser procesada por las aplicaciones, como es el caso de los servidores de bases de datos.
+* **Comunicación**. Permiten la comunicación entre los usuarios a través de mensajes escritos, por ejemplo email o correo electrónico mediante el protocolo SMTP.
+
 A veces, un servicio toma como nombre, el nombre del protocolo del nivel de aplicación en el que está basado. Por ejemplo, hablamos de servicio FTP, por basarse en el protocolo FTP.
 
 En esta unidad de trabajo programaremos en Java algunos de estos servicios (servidores y clientes).
@@ -23,25 +24,25 @@ Para ciertos servicios estándar, Java no proporciona objetos predefinidos y por
 ### java.net
 El paquete java.net, proporciona una API que se puede dividir en dos niveles:
 
-* Una API de bajo nivel, que permite representar los siguientes objetos:
+* Una API de **bajo nivel**, que permite representar los siguientes objetos:
   * Direcciones IP.
-    * Clase InetAddress. Implementa una dirección IP.
+    * Clase **InetAddress**. Implementa una dirección IP.
   * Sockets. Son los mecanismos básicos de comunicación bidireccional de datos.
-    * Clase Socket. Implementa un extremo de una conexión bidireccional.
-    * Clase ServerSocket. Implementa un socket que los servidores pueden utilizar para escuchar y aceptar peticiones de clientes.
-    * Clase DatagramSocket. Implementa un socket para el envío y recepción de datagramas.
-    * Clase MulticastSocket. Representa un socket datagrama, útil para enviar paquetes multidifusión.
+    * Clase **Socket**. Implementa un extremo de una conexión bidireccional.
+    * Clase **ServerSocket**. Implementa un socket que los servidores pueden utilizar para escuchar y aceptar peticiones de clientes.
+    * Clase **DatagramSocket**. Implementa un socket para el envío y recepción de datagramas.
+    * Clase **MulticastSocket**. Representa un socket datagrama, útil para enviar paquetes multidifusión.
   * Interfaces. Describen las interfaces de red.
-    * Clase NetworkInterface. Representa una interfaz de red compuesta por un nombre y una lista de direcciones IP asignadas a esta interfaz.
+    * Clase **NetworkInterface**. Representa una interfaz de red compuesta por un nombre y una lista de direcciones IP asignadas a esta interfaz.
 
-* Una API de alto nivel, que se ocupa de representar los siguientes objetos, mediante las siguientes clases:
-  * URI. Representan los identificadores de recursos universales.
+* Una API de **alto nivel**, que se ocupa de representar los siguientes objetos, mediante las siguientes clases:
+  * **URI**. Representan los identificadores de recursos universales.
     * Clase URI.
-  * URL. Representan localizadores de recursos universales.
+  * **URL**. Representan localizadores de recursos universales.
     * Clase URL. Representa una dirección URL.
   * Conexiones. Representa las conexiones con el recurso apuntado por URL.
-    * Clase URLConnection. Es la superclase de todas las clases que representan un enlace de comunicaciones entre la aplicación y una URL.
-    * Clase HttpURLConnection. Representa una URLConnection con soporte para HTTP y con ciertas caracteríaticas especiales.
+    * Clase **URLConnection**. Es la superclase de todas las clases que representan un enlace de comunicaciones entre la aplicación y una URL.
+    * Clase **HttpURLConnection**. Representa una URLConnection con soporte para HTTP y con ciertas caracteríaticas especiales.
 
 ### La clase InetAddress
 La clase InetAddress proporciona objetos que puedes utilizar para manipular tanto direcciones IP como nombres de dominio. También proporciona métodos para resolver los nombres de host a sus direcciones IP y viceversa.
@@ -77,7 +78,7 @@ Utilizando la clase URL, se puede establecer una conexión con cualquier recurso
 ¿Cómo podemos crear objetos URL? La clase URL dispone de diversos constructores para crear objetos tipo URL que se diferencian en la forma de pasarle la dirección URL. Por ejemplo, se puede crear un objeto URL:
 
 * A partir de todos o algunos de los elementos que forman parte de una URL, como por ejemplo:
-URL url=new URL("http", "www.ieselrincon.org",80","index.htm"). Crea un objeto URL a partir de los componentes indicados (protocolo, host, puerto, fichero), esto es, crea la URL: http://www.ieselrincon.org:80/index.htm.
+URL url=new URL("http", "www.ieselrincon.org","80","index.htm"). Crea un objeto URL a partir de los componentes indicados (protocolo, host, puerto, fichero), esto es, crea la URL: http://www.ieselrincon.org:80/index.htm.
 * A partir de la cadena especificada, dejando que el sistema utilice todos los valores por defecto que tiene definidos, como por ejemplo: URL url=new URL("http://www.ieselrincon.org") que crearía la URL : http://www.ieselrincon.org.
 
 Las URLs son objetos de una sola escritura. Lo que significa, que una vez que has creado un objeto URL no se puede cambiar ninguno de sus atributos (protocolo, nombre del host, nombre del fichero ni número de puerto).
@@ -98,34 +99,33 @@ Un objeto URLConnection se puede utilizar para leer desde y escribir hacia el re
 
 De entre los muchos métodos que nos permiten trabajar con conexiones URL vamos a centrarnos en primer lugar en los siguientes:
 
-* URL.openConnection(). Devuelve un objeto URLConnection que representa una nueva conexión con el recurso remoto al que se refiere la URL.
-* URL.openStream(). Abre una conexión a esta dirección URL y devuelve un InputStream para la lectura de esa conexión. Es una abreviatura de: openConnection(). getInputStream ().
-Te mostramos a continuación dos ejemplos muy sencillos que leen una URL, basándose tan solo en estos dos métodos. Los pasos a seguir para leer la URL son:
+* **URL.openConnection()**. Devuelve un objeto URLConnection que representa una nueva conexión con el recurso remoto al que se refiere la URL.
+* **URL.openStream()**. Abre una conexión a esta dirección URL y devuelve un InputStream para la lectura de esa conexión. Es una abreviatura de: openConnection(). getInputStream ().
+  
+Los pasos a seguir para leer la URL son:
 
 * Crear el objeto URL mediante URL `url = new URL(...);`
 * Obtener una conexión con el recurso especificado mediante `URL.openConnection()`.
 * Abrir conexión con esa URL mediante `URL.openStream()`.
 * Manejar los flujos necesarios para realizar la lectura
 
-Por ejemplo, podemos utilizar objetos URL para leer un archivo de texto y almacenarlo en un fichero local.
+Por ejemplo, podemos utilizar objetos URL para leer un archivo de texto y almacenarlo en un fichero local, tal y como se muestra en el siguiente ejemplo:
 
 [Código de ejemplo](./files/EjemploDescargaURL.java)
 
 ## Protocolos de comunicaciones del nivel de aplicación
-Dentro de la jerarquía de protocolos TCP/IP la capa de Aplicación ocupa el nivel superior y es precisamente la que incluye los protocolos de alto nivel relacionados con los servicios en red.
+Dentro de la jerarquía de protocolos TCP/IP, la capa de aplicación ocupa el nivel superior y es precisamente la que incluye los protocolos de alto nivel relacionados con los servicios en red.
 
 La capa de Aplicación define los protocolos (normas y reglas) que utilizan las aplicaciones para intercambiar datos. 
 
-A continuación, vamos a destacar, por su importancia y gran uso, algunos de los protocolos estándar del nivel de aplicación:
+A continuación, vamos a destacar algunos de los protocolos estándar del nivel de aplicación:
 
-* FTP. Protocolo para la transferencia de ficheros.
-* Telnet. Protocolo que permite acceder a máquinas remotas a través de una red. Permite manejar por completo la computadora remota mediante un intérprete de comandos.
-* SMTP. Protocolo que permite transferir correo electrónico. Recurre al protocolo de oficina postal POP para almacenar mensajes en los servidores, en sus versiones POP2 (dependiente de SMTP para el envío de mensajes) y POP3 (independiente de SMTP).
-* HTTP. Protocolo de transferencia de hipertexto.
-* SSH. Protocolo que permite gestionar remotamente a otra compuatora de la red de forma segura.
-* NNTP. Protocolo de Transferencia de Noticias (en inglés Network News Transfer Protocol).
-* IRC. Chat Basado en Internet (en inglés Internet Relay Chat)
-* DNS. Protocolo para traducir direcciones de red.
+* **FTP**. Protocolo para la transferencia de ficheros.
+* **Telnet**. Protocolo que permite acceder a máquinas remotas a través de una red. Permite manejar por completo la computadora remota mediante un intérprete de comandos.
+* **SMTP**. Protocolo que permite transferir correo electrónico. Recurre al protocolo de oficina postal POP para almacenar mensajes en los servidores, en sus versiones POP2 (dependiente de SMTP para el envío de mensajes) y POP3 (independiente de SMTP).
+* **HTTP**. Protocolo de transferencia de hipertexto.
+* **SSH**. Protocolo que permite gestionar remotamente a otra compuatora de la red de forma segura.
+* **DNS**. Protocolo para traducir direcciones de red.
 
 ### FTP
 
@@ -138,7 +138,7 @@ Las principales prestaciones de un servicio basado en el protocolo FTP o servici
   
 Sin embargo, el servicio FTP adolece de una importante deficiencia en cuanto a seguridad: La información y contraseñas se transmiten en texto plano. Esto está diseñado así, para conseguir una mayor velocidad de transferencia. Al realizar la transmisión en texto plano, un posible atacante puede capturar este tráfico, acceder al servidor y/o apropiarse de los archivos transferidos.
 
-Este problema de seguridad, se puede solucionar mediante la encriptación de todo el tráfico de información, a través del protocolo no estándar SFTP usando SSH.
+Este problema de seguridad se puede solucionar mediante la encriptación de todo el tráfico de información, a través del protocolo no estándar SFTP usando SSH.
 
 ¿Cómo funciona el servicio FTP? Es una servicio basado en una arquitectura cliente/servidor y, como tal, seguirá las pautas generales de funcionamiento de este modelo, en ese caso:
 
@@ -154,7 +154,7 @@ La conexión de un usuario remoto al servidor FTP puede hacerse como: usuario de
 El acceso al sistema de archivos es más o menos limitado, según el tipo de usuario qe se conecte y sus privilegios. Por ejemplo, el usuario anónimo solo tendrá acceso al directorio público que establece el administrador por defecto.
 
 El servicio FTP soporta dos modos de conexión: modo activo y modo pasivo.
-* **Modo activo**. Es la forma nativa de funcionamiento (esquema ampliable de la derecha).
+* **Modo activo**. Es la forma nativa de funcionamiento.
 Se establecen dos conexiones distintas: la petición de transferencia por parte del cliente y la atención a dicha petición, iniciada por el servidor. De manera que, si el cliente está protegido con un cortafuegos, deberá configurarlo para que permita esta petición de conexión entrante a través de un puerto que, normalmente, está cerrado por motivos de seguridad.
 * **Modo pasivo**. El cliente sigue iniciando la conexión, pero el problema del cortafuegos se traslada al servidor.
 
@@ -166,11 +166,11 @@ Java no dispone de bibliotecas específicas para programar clientes y servidores
 
 El paquete de la API de Apache para trabajar con FTP es org.apache.commons.net.ftp. Este paquete proporciona, entre otras, las siguientes clases:
 
-* Clase FTP. Proporciona las funcionalidades básicas para implementar un cliente FTP. Esta clase hereda de SocketClient.
-* Clase FTPReplay. Permite almacenar los valores devueltos por el servidor como código de respuesta a las peticiones del cliente.
-* Clase FTPClient. Encapsula toda la funcionalidad que necesitamos para almacenar y recuperar archivos de un servidor FTP, encargándose de todos los detalles de bajo nivel para su interacción con el servidor. Esta clase hereda de SocketClient.
-* Clase FTPClientConfig. Proporciona un forma alternativa de configurar objetos FTPClient.
-*  Clase FTPSClient. Proporciona FTP seguro, sobre SSL. Esta clase hereda de FTPClient.
+* Clase **FTP**. Proporciona las funcionalidades básicas para implementar un cliente FTP. Esta clase hereda de SocketClient.
+* Clase **FTPReplay**. Permite almacenar los valores devueltos por el servidor como código de respuesta a las peticiones del cliente.
+* Clase **FTPClient**. Encapsula toda la funcionalidad que necesitamos para almacenar y recuperar archivos de un servidor FTP, encargándose de todos los detalles de bajo nivel para su interacción con el servidor. Esta clase hereda de SocketClient.
+* Clase **FTPClientConfig**. Proporciona un forma alternativa de configurar objetos FTPClient.
+*  Clase **FTPSClient**. Proporciona FTP seguro, sobre SSL. Esta clase hereda de FTPClient.
 
 Para descargar la API de Apache e integrarla en NetBeans debes realizar lo siguiente:
 * Acceder a [https://commons.apache.org/proper/commons-net/download_net.cgi](https://commons.apache.org/proper/commons-net/download_net.cgi)
