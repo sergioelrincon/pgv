@@ -2,17 +2,8 @@
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-/******************************************************************************
- * Para que este programa funcione correctamente tendrás que tener salida a
- * Internet mediante un router
- * 
- * @author IMCG
- */
 public class EjemploInetAddress {
 
-  /**
-   * @param args the command line arguments
-   */
   public static void main(String[] args) {
 
     try {

@@ -11,18 +11,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-/**
- *
- * @author sergioramos
- */
 public class EjemploDescargaURL {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws MalformedURLException, IOException {
-        // TODO code application logic here
-        
+    public static void main(String[] args) throws MalformedURLException, IOException {        
         String url = "https://google.com";
         String filePath = "Google.html";
          

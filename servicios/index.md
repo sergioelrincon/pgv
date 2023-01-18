@@ -10,7 +10,7 @@ Una clasificación de los servicios en red atendiendo a su finalidad o propósit
 * **Información**. Los servicios de información pueden servir ficheros en función de sus contenidos, como pueden ser los documentos de hipertexto, por ejemplo HTTP, o bien, pueden servir información para ser procesada por las aplicaciones, como es el caso de los servidores de bases de datos.
 * **Comunicación**. Permiten la comunicación entre los usuarios a través de mensajes escritos, por ejemplo email o correo electrónico mediante el protocolo SMTP.
 
-A veces, un servicio toma como nombre, el nombre del protocolo del nivel de aplicación en el que está basado. Por ejemplo, hablamos de servicio FTP, por basarse en el protocolo FTP.
+A veces un servicio toma como nombre el nombre del protocolo del nivel de aplicación en el que está basado. Por ejemplo, hablamos de servicio FTP, por basarse en el protocolo FTP.
 
 En esta unidad de trabajo programaremos en Java algunos de estos servicios (servidores y clientes).
 
@@ -36,8 +36,6 @@ El paquete java.net, proporciona una API que se puede dividir en dos niveles:
     * Clase **NetworkInterface**. Representa una interfaz de red compuesta por un nombre y una lista de direcciones IP asignadas a esta interfaz.
 
 * Una API de **alto nivel**, que se ocupa de representar los siguientes objetos, mediante las siguientes clases:
-  * **URI**. Representan los identificadores de recursos universales.
-    * Clase URI.
   * **URL**. Representan localizadores de recursos universales.
     * Clase URL. Representa una dirección URL.
   * Conexiones. Representa las conexiones con el recurso apuntado por URL.
@@ -67,7 +65,7 @@ isReachable(int tiempo). Devuelve TRUE o FALSE dependiendo de si la dirección e
 [Código de ejemplo](./files/EjemploInetAddress.java)
 
 ### La clase URL
-Una URL, Localizador Uniforme de Recursos, representa una dirección a un recurso de la World Wide Web. Un recurso puede ser algo tan simple como un archivo o un directorio, o puede ser una referencia a un objeto más complicado, como una consulta a una base de datos, el resultado de la ejecución de un programa, etc.
+Una URL representa una dirección a un recurso web. Un recurso puede ser algo tan simple como un archivo o un directorio, o puede ser una referencia a un objeto más complicado, como una consulta a una base de datos, el resultado de la ejecución de un programa, etc.
 
 ![URL](img/url.png)
 
@@ -81,7 +79,7 @@ Utilizando la clase URL, se puede establecer una conexión con cualquier recurso
 URL url=new URL("http", "www.ieselrincon.org","80","index.htm"). Crea un objeto URL a partir de los componentes indicados (protocolo, host, puerto, fichero), esto es, crea la URL: http://www.ieselrincon.org:80/index.htm.
 * A partir de la cadena especificada, dejando que el sistema utilice todos los valores por defecto que tiene definidos, como por ejemplo: URL url=new URL("http://www.ieselrincon.org") que crearía la URL : http://www.ieselrincon.org.
 
-Las URLs son objetos de una sola escritura. Lo que significa, que una vez que has creado un objeto URL no se puede cambiar ninguno de sus atributos (protocolo, nombre del host, nombre del fichero ni número de puerto).
+Las URL son objetos de una sola escritura. Es decir, una vez que se ha creado un objeto URL no se puede cambiar ninguno de sus atributos (protocolo, nombre del host, nombre del fichero ni número de puerto).
 
 Se puede analizar y descomponer una URL utilizando los siguientes métodos:
 
@@ -122,7 +120,7 @@ A continuación, vamos a destacar algunos de los protocolos estándar del nivel 
 
 * **FTP**. Protocolo para la transferencia de ficheros.
 * **Telnet**. Protocolo que permite acceder a máquinas remotas a través de una red. Permite manejar por completo la computadora remota mediante un intérprete de comandos.
-* **SMTP**. Protocolo que permite transferir correo electrónico. Recurre al protocolo de oficina postal POP para almacenar mensajes en los servidores, en sus versiones POP2 (dependiente de SMTP para el envío de mensajes) y POP3 (independiente de SMTP).
+* **SMTP**. Protocolo que permite transferir correo electrónico. Recurre al protocolo de oficina postal POP para almacenar mensajes en los servidores, en sus versiones POP2 (dependiente de SMTP para el envío de mensajes) y POP3/IMAP (independiente de SMTP).
 * **HTTP**. Protocolo de transferencia de hipertexto.
 * **SSH**. Protocolo que permite gestionar remotamente a otra compuatora de la red de forma segura.
 * **DNS**. Protocolo para traducir direcciones de red.
