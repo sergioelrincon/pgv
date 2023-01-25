@@ -180,14 +180,15 @@ Para descargar la API de Apache e integrarla en NetBeans debes realizar lo sigui
 
 #### Implementación
 
-Una forma sencilla de implementar un cliente FTP es mediante la clase FTPClient. Una vez creado el cliente, como en cualquier objeto SocketClient habrá que seguir el siguente esquema básico de trabajo:
+Una forma sencilla de implementar un cliente FTP es mediante la clase [FTPClient](https://commons.apache.org/proper/commons-net/apidocs/org/apache/commons/net/ftp/FTPClient.html). Una vez creado el cliente, como en cualquier objeto SocketClient, habrá que seguir el siguente esquema básico de trabajo:
 
-* Realizar la conexión del cliente con el servidor. El método connect(InetAddress host) realiza la conexión del cliente con el servidor de nombre host, abriendo un objeto Socket conectado al host remoto en el puerto por defecto.
-* Comprobar la conexión. El método getReplyCode() devuelve un código de respuesta del servidor indicativo de el éxito o fracaso de la conexión.
-* Validar usuario. El método login(String usuario, String password) permite esa validación.
+* Realizar la conexión del cliente con el servidor. El método `connect(InetAddress host)` realiza la conexión del cliente con el servidor de nombre host, abriendo un objeto Socket conectado al host remoto en el puerto por defecto.
+* Comprobar la conexión. El método `getReplyCode()` devuelve un código de respuesta del servidor indicativo de el éxito o fracaso de la conexión.
+* Validar usuario. El método `login(String usuario, String password)` permite esa validación.
 * Realizar operaciones contra el servidor. Por ejemplo:
-  * Listar todos los ficheros disponibles en una determinada carpeta remota mediante el método listNames().
-  * Recuperar el contenido de un fichero remoto mediante retrieveFile(String rutaRemota, OutputStream ficheroLocal) y transferirlo al equipo local para escribirlo en el ficheroLocal especificado.
-* Desconexión del servidor. El método disconnect() o logout() realiza la desconexión del servidor.
+  * Listar todos los ficheros disponibles en una determinada carpeta remota mediante el método `listNames()`.
+  * Descargar un fichero remoto mediante `retrieveFile(String rutaRemota, OutputStream ficheroLocal)` y transferirlo al equipo local para escribirlo en el ficheroLocal especificado.
+  * Subir un fichero local mediante `storeFile(String remote, InputStream ficheroLocal)`.
+* Desconectar del servidor. El método `disconnect()` realiza la desconexión del servidor.
 
 ## Programación de servidores
