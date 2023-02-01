@@ -1,3 +1,21 @@
+- [Programación de servicios en red](#programación-de-servicios-en-red)
+  - [Bibliotecas de clases y componentes Java](#bibliotecas-de-clases-y-componentes-java)
+    - [java.net](#javanet)
+    - [La clase InetAddress](#la-clase-inetaddress)
+    - [La clase URL](#la-clase-url)
+    - [La clase URLConnection](#la-clase-urlconnection)
+  - [Protocolos de comunicaciones del nivel de aplicación](#protocolos-de-comunicaciones-del-nivel-de-aplicación)
+    - [FTP](#ftp)
+  - [Programación de aplicaciones cliente](#programación-de-aplicaciones-cliente)
+    - [Cliente FTP](#cliente-ftp)
+      - [Implementación](#implementación)
+  - [Programación de servidores](#programación-de-servidores)
+    - [Servidor web](#servidor-web)
+      - [Peticiones del cliente](#peticiones-del-cliente)
+        - [Método GET](#método-get)
+      - [Respuestas del servidor](#respuestas-del-servidor)
+
+
 # Programación de servicios en red
 Un servicio en red es un software o programa que proporciona una determinada funcionalidad o utilidad al sistema. Por lo general, estos programas están basados en un conjunto de protocolos y estándares.
 
@@ -190,3 +208,69 @@ Una forma sencilla de implementar un cliente FTP es mediante la clase [FTPClient
 * Desconectar del servidor. El método `disconnect()` realiza la desconexión del servidor.
 
 ## Programación de servidores
+
+La clase ServerSocket es la que se utilizaremos a la hora de implementar servidores. Para programar servidores o servicios basados en protocolos del nivel de aplicación, como por ejemplo el protocolo HTTP, será necesario conocer el comportamiento y funcionamiento del protocolo de aplicación en cuestión, y saber que tipo de mensajes intercambia con el cliente ante una solicitud o petición de datos.
+
+También es importante que el servidor sea capaz de atender a multitud de **peticiones que pueden ser concurrentes** en el tiempo. Esto lo podemos conseguir mediante la programación del servidor utilizando hilos o Threads.
+
+### Servidor web
+
+Los servidores web se basan en el protocolo HTTP donde fundamentalmente se gestionan dos tipos de mensajes: peticiones de clientes al servidor y respuestas del servidor a los clientes. Existen diferentes tipos de peticiones y respuestas, junto a información adjunta a dichas peticiones (cabeceras), de las cuales nosotros utilizaremos un pequeño subconjunto.
+
+Para crear un servidor web, el esquema básico a seguir será el siguiente:
+
+* Crear un socketServer asociado al puerto 80 (puerto por defecto para el protocolo HTTP).
+* Esperar peticiones HTTP del cliente.
+* Acceptar las peticiones del cliente.
+* Procesar las peticiones, enviando al cliente mensajes HTTP de respuesta.
+* Cerrar socket del cliente.
+
+Los conceptos básicos que debemos tener claros para poder implementar el servidor son los siguientes:
+
+#### Peticiones del cliente
+
+En el protocolo HTTP el cliente realiza una petición que se descompone en:
+
+* Un comando HTTP, seguido de una dirección de documento o URI (Uniform Resource Identifier), y un número de versión HTTP, de forma que se tiene una línea con el formato `Comando   URI   Protocolo`
+
+  Por ejemplo:
+
+      GET   /index.html  HTTP/1.1
+
+* Tras la petición, el cliente puede enviar información adicional de cabeceras (headers) con las que se da al servidor más información sobre la petición (tipo de software que ejecuta el cliente, tipo de contenido (content-type) que entiende el cliente, etc). Esta información puede utilizarla el servidor para generar la respuesta apropiada. Las cabeceras se envían una por línea, donde cada una tiene el formato:
+      
+      Clave: valor
+
+  Por ejemplo:
+
+      Accept-Encoding: gzip, deflate
+      User-Agent: Mozilla/4.0 (compatible;MSIE5.0;Windows 98)
+
+* Tras las cabeceras, el cliente envía una línea en blanco para indicar el final de la sección de cabeceras.
+
+* Finalmente, se pueden enviar datos adicionales si el comando HTTP solicitado lo requiere.
+
+##### Método GET
+
+El comando GET permite solicitar al servidor un documento. Su formato es el siguiente:
+
+    GET   /cgi-bin/pagina.cgi?IDIOMA=C&MODELO=a+b  HTTP/1.1
+
+#### Respuestas del servidor
+
+Las respuestas del servidor tienen tres partes:
+
+* Una línea de estado con la versión del protocolo HTTP utilizado en el servidor, un código de estado y una breve descripción del mismo:
+  
+      HTTP/1.0  200  OK
+
+* Información de cabeceras, donde se envía al cliente información sobre el servidor y sobre el documento solicitado. El formato de estas cabeceras es el mismo que el visto para las peticiones del cliente, terminando en una línea en blanco. De entre ellas, destacamos:
+
+  * Content-Type: Tipo MIME de la respuesta y el conjunto de caracteres que se utilizará. Por ejemplo:
+
+        Content-Type:text/html;charset=UTF-8
+
+  * Content-Length: Número de bytes de la respuesta
+
+* Finalmente, se envía el documento solicitado. Para marcar el final del mismo se envía una línea en blanco.
+
