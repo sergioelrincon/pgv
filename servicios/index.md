@@ -209,7 +209,7 @@ Una forma sencilla de implementar un cliente FTP es mediante la clase [FTPClient
 
 ## Programación de servidores
 
-La clase ServerSocket es la que se utilizaremos a la hora de implementar servidores. Para programar servidores o servicios basados en protocolos del nivel de aplicación, como por ejemplo el protocolo HTTP, será necesario conocer el comportamiento y funcionamiento del protocolo de aplicación en cuestión, y saber que tipo de mensajes intercambia con el cliente ante una solicitud o petición de datos.
+La clase ServerSocket es la que utilizaremos a la hora de implementar servidores. Para programar servidores o servicios basados en protocolos del nivel de aplicación será necesario conocer el comportamiento y funcionamiento del protocolo  en cuestión, y saber qué tipo de mensajes intercambia con el cliente ante una solicitud o petición de datos.
 
 También es importante que el servidor sea capaz de atender a multitud de **peticiones que pueden ser concurrentes** en el tiempo. Esto lo podemos conseguir mediante la programación del servidor utilizando hilos o Threads.
 
