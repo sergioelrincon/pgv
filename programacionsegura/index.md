@@ -170,6 +170,17 @@ Algoritmos de encriptación de clave privada:
 
 Los algoritmos de cifrado y descifrado usan la misma clave.
 
+El Java podemos realizar encriptación/desencriptación de clave simétrica utilizando la clase [`Cipher`](https://docs.oracle.com/javase/7/docs/api/javax/crypto/Cipher.html) de la siguiente forma:
+
+* Mediante el método `getInstance()` se indica el algoritmo que se utilizará para cifrar (Por ejemplo "DES").
+* Mediante el método `init()` se pasará por parámetro el modo de operación del objeto Cipher, por ejemplo encriptar(`ENCRYPT_MODE`) o desencriptar(`DECRYPT_MODE`) y la clave.
+* Mediante el método `update()` se indicará el texto a cifrar y mediante `doFinal()` se generará el texto cifrado en forma de array de bytes.
+
+La clave la generaremos previamente mediante la clase KeyGenerator de la siguiente forma:
+* Invocamos al método `getInstance()` pasándole por parámetro el algoritmo para el que se va a utilizar la clave (por ejemplo, "DES"). Esto devolverá un objeto de la clase `KeyGen`.
+* Especificamos la longitud, en bits, que tendrá la clave invocando al método `init()` de la clase `KeyGen`.
+* Generamos la clave invocando al método `generateKey()`. La clave la almacenaremos en un objeto de la clase `SecretKey`.
+
 <!--
 La clase que vamos a utilizar para generar claves para algoritmos de clave privada será `SecretKeyGenerator`.
 
