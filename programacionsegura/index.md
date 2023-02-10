@@ -1,4 +1,14 @@
 
+- [Programación segura en Java](#programación-segura-en-java)
+  - [**Seguridad en comunicaciones de datos**](#seguridad-en-comunicaciones-de-datos)
+    - [**Comunicaciones de datos**](#comunicaciones-de-datos)
+    - [**Aspectos de seguridad en las comunicaciones de datos**](#aspectos-de-seguridad-en-las-comunicaciones-de-datos)
+    - [**Resúmenes de mensajes (funciones de hash o digest)**](#resúmenes-de-mensajes-funciones-de-hash-o-digest)
+    - [**Criptografía**](#criptografía)
+      - [**Criptografía de clave privada (o simétrica)**](#criptografía-de-clave-privada-o-simétrica)
+      - [Criptografía de clave pública (o asimétrica)](#criptografía-de-clave-pública-o-asimétrica)
+    - [Firma digital](#firma-digital)
+
 # Programación segura en Java
 
 ## **Seguridad en comunicaciones de datos**
@@ -18,9 +28,9 @@ El medio de comunicación, normalmente, dista mucho de ser ideal. Los mensajes s
 Los aspectos fundamentales de la seguridad en las comunicaciones de datos son los siguientes:
 
 * **Integridad**: los datos que recibe el receptor son idénticos a los que ha emitido el emisor. Es decir, que no se han alterado en algún punto intermedio. Se podrían deber a errores en el medio de comunicación o por la acción de alguien que quiere alterarlos.
-* **Autenticación**: el receptor del mensaje puede estar seguro de que el emisor del mensaje es quien espera que sea. Es decir, que el emisor del mensaje es quien dice ser y no un suplantador.
+* **Autenticación**: el receptor del mensaje puede estar seguro de que el emisor del mensaje es quien espera que sea. Es decir, que *el emisor del mensaje es quien dice ser* y no un suplantador. <!-- Si mando una firma pero nadie se asegura de que la firma es mía, no se garantizaría autenticación -->
 * **Confidencialidad**: los datos transmitidos solo son inteligibles para el receptor previsto del mensaje. Por lo tanto, los datos deben ser inteligibles solo para el destinatario previsto. Esto se consigue enviando el mensaje encriptado, de forma que solo el destinatario previsto sea capaz de desencriptarlo.
-* **No repudio**: el recpetor del mensaje puede demostrar, una vez recibido un mensaje de un emisor, que el mensaje fue emitido por dicho emisor.
+* **No repudio**: Provee garantía al receptor de una comunicación en cuanto que *el mensaje fue originado por el emisor* y no por alguien que se hizo pasar por este. <!-- Otra cosa es que el emisor sea quien dice ser -->
 
 Las mayores dificultades para ganantizar la seguridad en las comunicaciones entre procesos se plantean por el hecho de que estas se realizan a través de un canal no confiable. Es decir, no se puede restringir el acceso a dicho canal y por lo tanto cualquiera podría acceder a él para obtener una copia del mensaje o modificarlo/destruirlo.
 
@@ -55,7 +65,7 @@ JCA contiene una arquitectura basada en un conjunto de API para todo lo relacion
 
 -->
 
-### Resúmenes de mensajes (funciones de hash o digest)
+### **Resúmenes de mensajes (funciones de hash o digest)**
 
 Una función de hash o digest hace corresponder a cada secuencia de bytes, por larga que sea, una cadena de longitud fija y, por lo general, relativamente corta. Este cálculo se realiza muy rápido. En cambio, es prácticamente imposible obtener una secuenca de bytes a la que corresponda un valor de hash determinado. Se dice que las funciones de hash son unidireccionales.
 
@@ -105,7 +115,7 @@ Por ejemplo, para la string "Esta es mi cadena" se generaría el hash SHA-2 "93d
     sergio@sergio:~$ echo -n "Esta es mi cadena" | sha256sum 
     93dc0add70b99319fb15f474d852c1c2cb25096d80398a6407cae018bc834fd1
 
-### Criptografía
+### **Criptografía**
 
 Su objetivo es la escritura de mensajes de forma que sean ininteligibles excepto para el destinatario del mensaje. 
 
@@ -113,7 +123,7 @@ El funcionamiento de cualquier comunicación cifrada siempre se basa en un secre
 
 Un intento de descifrar un mensaje por parte de un emisor no previsto es un **ataque criptográfico**.
 
-Por ejemplo, si utilizamos el método "desplazar letras" de forma que la clave sea el número de desplazamientos. Un ataque por fuerza bruta consistiría en probar todos los desplazamientos posibles.
+Por ejemplo, si utilizamos el método "desplazar letras del abecedario" ([Cifrado César](https://es.wikipedia.org/wiki/Cifrado_C%C3%A9sar)) de forma que la clave sea el número de desplazamientos. Un ataque por fuerza bruta consistiría en probar todos los desplazamientos posibles.
 
 Un **criptoanálisis** consiste en el análisis de métodos criptográficos y de mensajes cifrados para conseguir descifrar mensajes sin conocimiento previo de la información secreta usada para su cifrado.
 
@@ -138,7 +148,7 @@ El paquete *java.security* proporciona las siguientes clases para la gestión de
 * La clase `SecureRandom`: permite generar números aleatorios seguros.
   -->
 
-#### Criptografía de clave privada (o simétrica)
+#### **Criptografía de clave privada (o simétrica)**
 
 La criptografía tradicional es de clave privada o simétrica. **La clave que se usa para cifrar un mensaje es la misma que se usa para descifrarlo**. Dicha clave es un secreto compartido entre emisor y receptor. 
 
@@ -155,7 +165,7 @@ Otro inconveniente es el gran número de claves que se necesitaría si el grupo 
 La criptografía de clave privada puede utilizarse para garantizar:
 
 * **Confidencialidad**: se supone que solo emisor y receptor conocen la clave. Solo el emisor puede desencriptar el mensaje.
-* **Autenticación**: el receptor puede estar seguro de que solo el emisor ha podido generar el mensaje. Sin embargo, la criptografía de clave simétrica por sí sola no puede garantizarlo. Para ello requiere la ayuda de la criptografía de clave pública, como veremos más adelante.
+* **Autenticación**: ¿el receptor puede estar seguro de que solo el emisor ha podido generar el mensaje? La criptografía de clave simétrica por sí sola no puede garantizarlo. Para ello requiere la ayuda de la criptografía de clave pública, como veremos más adelante.
 
 La criptografía de clave privada no puede garantizar el no repudio. El emisor puede argumentar que un mensaje que está en poder del receptor no ha sido emitido por él mismo sino que ha sido creado por el receptor y no se le podría refutar. Ambos disponen de la misma clave para encriptar. Por esto mismo no es apropiado para la banca, administración electrónica o comercio electrónico.
 
@@ -176,9 +186,9 @@ El Java podemos realizar encriptación/desencriptación de clave simétrica util
 * Mediante el método `init()` se pasará por parámetro el modo de operación del objeto Cipher, por ejemplo encriptar(`ENCRYPT_MODE`) o desencriptar(`DECRYPT_MODE`) y la clave.
 * Mediante el método `update()` se indicará el texto a cifrar y mediante `doFinal()` se generará el texto cifrado en forma de array de bytes.
 
-La clave la generaremos previamente mediante la clase KeyGenerator de la siguiente forma:
+Las claves para algoritmos de cifrado se suelen generar mediante métodos específicos de determinadas clases que implementan ese tipo de funcionalidades. En este caso la generaremos mediante la clase `KeyGenerator` de la siguiente forma:
 * Invocamos al método `getInstance()` pasándole por parámetro el algoritmo para el que se va a utilizar la clave (por ejemplo, "DES"). Esto devolverá un objeto de la clase `KeyGen`.
-* Especificamos la longitud, en bits, que tendrá la clave invocando al método `init()` de la clase `KeyGen`.
+* Especificamos la longitud, en bits, que tendrá la clave invocando al método `init()` de la clase `KeyGen`. En el caso del algoritmo "DES", el tamaño de su clave es de 56 bits.
 * Generamos la clave invocando al método `generateKey()`. La clave la almacenaremos en un objeto de la clase `SecretKey`.
 
 <!--
