@@ -262,6 +262,9 @@ La clase [Signature](https://docs.oracle.com/javase/7/docs/api/java/security/Sig
 Los pasos que debes seguir para realizar la firma de un mensaje y después verificarla son los siguientes:
 
 * Generar las claves públicas y privadas mediante la clase [KeyPairGenerator](https://docs.oracle.com/javase/8/docs/api/java/security/KeyPairGenerator.html):
+  * Invocamos a `getInstance(String algorithm)`, que nos devuelve un objeto de tipo KeyPairGenerator. El algoritmo a utilizar podría ser, por ejemplo, "DSA".
+  * Inicializamos el objeto pasándole el tamaño de la clave: `generador.initialize(1024)` - Para una clave de 1024 bits
+  * El método `genKeyPair()`de la clase KeyPairGenerator nos devuelve el par de claves, que podemos obtener con los métodos `getPrivate()`y `getPublic()`.
   * La `PrivateKey` la utilizaremos para firmar.
   * La `PublicKey` la utilizaremos para verificar la firma.
 * Realizar la firma digital mediante la clase `Signature` y un algoritmo asimétrico, por ejemplo "DSA". (Esto lo haría el emisor)
